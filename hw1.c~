@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+int main(int argc, char * argv[])
+{
+  FILE *maintext = fopen(argv[0],"r");
+  char** wordlis;
+  int curlen = 20;
+  char* curword = (char*) calloc(curlen,sizeof(char));
+  while (fgets(curword, curlen, maintext)!=NULL)
+    {
+      printf("%s\n",curword);
+
+
+    }
+  if (maintext != NULL)
+    {
+      printf("IT WORKS\n");
+    }
+  
+  return 0;
+}
