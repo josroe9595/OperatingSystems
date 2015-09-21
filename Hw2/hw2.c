@@ -24,15 +24,25 @@ int main( int argc, char * argv[])
   char* word_buffer;
   int check = 0;
   //pid = fork();
-  while (check < num_proc) {
+
+  pid = fork();
+  int orig = getpid();
+  while (check < num_proc){
+    check+=1;
     pid = fork();
+    check+=1;
     if (pid > 0){
     	word_buffer = malloc(sizeof(char)*(num_by));
       read(fil,word_buffer,sizeof(char)*num_by);
-      printf("CHILD %d CHUNK: %s",pid,word_buffer);
+      printf("CHILD %d CHUNK: %s\n",getpid(),word_buffer);
       fflush(stdout);
-      check += 1;
+      int x = getpid();
+      if (x - orig < num_proc) break;
+      //if (strlen(word_buffer) < 1) {printf("DOESTHIS\n\n\n\n");fflush(stdout);}
+
+      //check += 1;
     } 
     wait();
+    
   }
 }
